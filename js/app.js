@@ -4,16 +4,15 @@
 
 let card = document.querySelectorAll(".card");
 let cardsHolder = [...card]; 
-let deck = document.querySelector(".deck");
+const deck = document.querySelector(".deck");
 let moves = document.querySelector(".moves");
-let count = 0;
 const time = document.querySelector(".timer");
 let seconds = 00; minutes = 00; hours = 0;
 const stars = document.querySelectorAll(".fa-star")
 let openedCards = deck.querySelectorAll(".open");
 let matchedCards = document.getElementsByClassName("match");
 let startNow;
-let modal = document.getElementById("modal");
+const modal = document.getElementById("modal");
 let modalTitle = document.querySelector(".modal-title");
 
 ////////////////////////******************/////////////////////////
@@ -124,7 +123,7 @@ function countMoves (){
 /// start timer function when moves ==1
 function startTimer() {
 	
-	if (moves.innerHTML == 1) {
+	if (moves.innerHTML == 1) { ///I think that's fine so the player can compare cards in the fair time but if I count time with just the first click , I think it Is not fair 
 ///https://jsfiddle.net/Daniel_Hug/pvk6p/
 		function add() {
 		    seconds++;
@@ -137,7 +136,9 @@ function startTimer() {
 		        }
 		    }
 	    
-	    time.textContent = (hours ? (hours > 9 ? hours : "0" + hours) : "00") + ":" + (minutes ? (minutes > 9 ? minutes : "0" + minutes) : "00") + ":" + (seconds > 9 ? seconds : "0" + seconds);
+	    time.textContent = (hours ? (hours > 9 ? hours : "0" + hours) : "00") +
+	    ":" + (minutes ? (minutes > 9 ? minutes : "0" + minutes) : "00") + ":" +
+	    (seconds > 9 ? seconds : "0" + seconds);
 
 	    timer();
 		}
@@ -156,6 +157,8 @@ function modalWindow() {
 	if (matchedCards.length == 16) {
 		// Displaying the modal
 		modal.classList.add("show");
+	    clearTimeout(t);
+		
 		// Declare some variables
 		let finalTime = time.innerHTML;
 		//console.log(finalTime);
@@ -181,21 +184,17 @@ function resetGame() {
     	cardsHolder[i].classList.remove("show", "open", "match");
     }
     // Reset moves
-    ///count = 0; uou need use that when you use count in the countMoves fuctoion
-    moves.innerHTML = 0;///count;
+    moves.innerHTML = 0;///count
     // Reset rating
     for (let i= 0; i < stars.length; i++) {
-    	///stars[i].style.color = "#FFD700";
+
     	stars[i].style.visibility = "visible";
 	}
 	// Reset Timer
 	seconds = 0;
 	minutes = 0;
 	hours = 0;
-	time.innerHTML = "0 Min(s) 0 Sec(s)"
+	time.innerHTML = "0 Min(s) 0 Sec(s)";
 	window.location.reload(false);
 }
-
-
-
-
+///Thank you for notes
